@@ -22,10 +22,13 @@ describe "UserPages" do
   end
 
   describe "signup" do
-  	  before { visit signup_path}
+  	before { visit signup_path}
 
+    let (:submit) { "Create my account" }
 	  describe "with invalid information" do
-	  	expect { click_button "Create my account"}.not_to change(User, :count)
+	  	it "should not create a new user" do
+        expect { click_button  submit}.not_to change(User, :count)
+      end
 	  end	
 
 	  describe "with valid information" do
@@ -37,7 +40,7 @@ describe "UserPages" do
 	  	end	
   		it "should create a user" do
         	expect { click_button submit }.to change(User, :count).by(1)
-      	end
+      end
 	  end 	
   end	  
 
